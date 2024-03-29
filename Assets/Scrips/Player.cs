@@ -20,11 +20,12 @@ public class Player : MonoBehaviour
     {
 
     }
-
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         Move();
+    }
+    void Update()
+    {
     }
 
     private void Move()
@@ -33,9 +34,13 @@ public class Player : MonoBehaviour
         movePos.x = Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime;
         transform.position = new Vector2(transform.position.x + movePos.x, transform.position.y);
         anim.SetBool("walk", movePos.x != 0);
-        if(movePos.x<0)
+        if (movePos.x < 0)
         {
             gameObject.transform.localScale = new Vector3(-1.5f, 1.5f, 1);
+        }
+        if (movePos.x > 0)
+        {
+            gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1);
         }
     }
 }
