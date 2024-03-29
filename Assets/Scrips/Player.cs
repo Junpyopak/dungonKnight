@@ -6,10 +6,13 @@ public class Player : MonoBehaviour
 {
     [Header("플레이어 이동")]
     [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float jumpForse= 3f;
     Vector2 movePos;
     Rigidbody2D rigid;
     Animator anim;
+    bool jump;
     // Start is called before the first frame update
+
 
     private void Awake()
     {
@@ -42,5 +45,6 @@ public class Player : MonoBehaviour
         {
             gameObject.transform.localScale = new Vector3(1.5f, 1.5f, 1);
         }
+        
     }
 }
