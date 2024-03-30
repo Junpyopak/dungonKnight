@@ -319,10 +319,8 @@ MonoBehaviour:
   moveSpeed: 7
   jumpForse: 5
   isGround: 0
-  dashTimer: 2
-  dashTime: 3
-  isDash: 0
-  dashSpeed: 3
+  dashTime: 0.2
+  dashSpeed: 12
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

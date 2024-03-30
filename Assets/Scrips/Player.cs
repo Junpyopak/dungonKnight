@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("플레이어 이동")]
-    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float moveSpeed = 7f;
     [SerializeField] float jumpForse = 3f;
     [SerializeField] bool isGround = false;
     Vector2 movePos;
@@ -15,14 +15,10 @@ public class Player : MonoBehaviour
 
 
     [Header("플레이어 대쉬")]
-    [SerializeField] float dashTimer = 0.0f;//타이머
-    [SerializeField] float dashTime = 0.3f;
+    float dashTime = 0f;
     bool isDash = false;
     TrailRenderer tr;
-    [SerializeField] float dashCoolTime = 2.0f;
-    float dashCoolTimer = 0.0f;
     [SerializeField] float dashSpeed = 12;
-    float verticalValocity = 0f;
 
     private void Awake()
     {
@@ -38,6 +34,7 @@ public class Player : MonoBehaviour
     {
         Move();
         jump();
+        Dash();
     }
     void Update()
     {
@@ -70,7 +67,7 @@ public class Player : MonoBehaviour
         //        rigid.velocity = Vector2.up * jumpForse;
         //    }
         //}
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
+        if (Input.GetKeyDown(KeyCode.C))
         {
             rigid.velocity = Vector2.up * jumpForse;
         }
@@ -79,9 +76,22 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            isDash = true;
+            isDash = true;           
+        }
+        if (dashTime <= 0)//대쉬가 종료되면 다시 원래 스피드 인 7로
+        {
+            moveSpeed = 7;
+            if (isDash == true)//대쉬가 활성화되면
+            {
+                dashTime = 0.2f;//0.2초동안 대쉬
+            }
+        }
+        else
+        {
+            dashTime -= Time.deltaTime;
             moveSpeed = dashSpeed;
         }
-        moveSpeed = 7;
+        isDash = false;
+        
     }
 }
