@@ -15,17 +15,21 @@ public class Player : MonoBehaviour
 
 
     [Header("플레이어 대쉬")]
-    [SerializeField] float dashTimer = 5f;
+    [SerializeField] float dashTimer = 0.0f;//타이머
     [SerializeField] float dashTime = 0.3f;
-    [SerializeField] bool isDash = false;
-    [SerializeField] float dashSpeed = 3f;
-
+    bool isDash = false;
+    TrailRenderer tr;
+    [SerializeField] float dashCoolTime = 2.0f;
+    float dashCoolTimer = 0.0f;
+    [SerializeField] float dashSpeed = 12;
+    float verticalValocity = 0f;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
+        tr = GetComponent<TrailRenderer>();
     }
     void Start()
     {
@@ -59,7 +63,7 @@ public class Player : MonoBehaviour
     private void jump()
     {
 
-        //if(col.IsTouchingLayers(LayerMask.GetMask("Ground"))==true)
+        //if (col.IsTouchingLayers(LayerMask.GetMask("Ground")) == true)
         //{
         //    if (Input.GetKeyDown(KeyCode.LeftAlt))
         //    {
@@ -70,5 +74,14 @@ public class Player : MonoBehaviour
         {
             rigid.velocity = Vector2.up * jumpForse;
         }
+    }
+    private void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            isDash = true;
+            moveSpeed = dashSpeed;
+        }
+        moveSpeed = 7;
     }
 }
