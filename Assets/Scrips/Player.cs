@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("플레이어 대쉬"), SerializeField]
     float dashTime = 0.5f;
-    [SerializeField]bool isDash = false;
+    bool isDash = false;
     [SerializeField] float dashSpeed = 12;
 
     private void Awake()
