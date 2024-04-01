@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     [Header("플레이어 대쉬")]
     float dashTime = 0f;
     bool isDash = false;
-    TrailRenderer tr;
     [SerializeField] float dashSpeed = 12;
 
     private void Awake()
@@ -25,7 +24,6 @@ public class Player : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
-        tr = GetComponent<TrailRenderer>();
     }
     void Start()
     {
