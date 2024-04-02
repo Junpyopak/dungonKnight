@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 378654345}
   - component: {fileID: 378654344}
   - component: {fileID: 378654346}
+  - component: {fileID: 378654350}
   - component: {fileID: 378654349}
   - component: {fileID: 378654347}
   - component: {fileID: 378654348}
@@ -204,7 +205,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 378654343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: -12.12, z: 0}
+  m_LocalPosition: {x: -25, y: -11.754, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -262,7 +263,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.01886788, y: -0.48928624}
@@ -293,7 +294,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -322,6 +323,19 @@ MonoBehaviour:
   isGround: 0
   dashTime: 0.5
   dashSpeed: 12
+--- !u!114 &378654350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 378654343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c51b349680889e74f88b9f9b7f617b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGround: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4887,7 +4901,6 @@ GameObject:
   m_Component:
   - component: {fileID: 772512899}
   - component: {fileID: 772512900}
-  - component: {fileID: 772512901}
   m_Layer: 0
   m_Name: HitGround
   m_TagString: Untagged
@@ -4903,7 +4916,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772512898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.5, z: 0}
+  m_LocalPosition: {x: 0.061, y: -1.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4929,21 +4942,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.72387064, y: 0.35569763, z: 1}
-  m_Center: {x: -0.0051136017, y: 0.32215118, z: 0}
---- !u!114 &772512901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 772512898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c51b349680889e74f88b9f9b7f617b94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isGround: 0
+  m_Size: {x: 0.73488617, y: 0.12987201, z: 1}
+  m_Center: {x: 0.0003941854, y: 0.20923838, z: 0}
 --- !u!1 &821303178
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,23 +7,23 @@ public class HitBox : MonoBehaviour
 {
     [SerializeField]
     bool isGround = false;
-    Collider2D collision;
+    BoxCollider2D collision;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    collision = transform.Find("HitGround").GetComponent<Collider2D>();
-    //}
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.IsTouchingLayers(LayerMask.GetMask("Ground")) == true)
-    //    {
-    //       isGround = true;
-    //    }
-    //}
+    
+    void Update()
+    {
+        collision = transform.GetChild(0).GetComponent<BoxCollider2D>();
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            isGround = true;
+        }
+    }
 }
