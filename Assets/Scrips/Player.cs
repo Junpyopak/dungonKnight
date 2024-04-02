@@ -32,9 +32,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.layer==LayerMask.NameToLayer("Ground"))//플레이어의 콜라이더가 ground라는 레이어에 닿았을때
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))//플레이어의 콜라이더가 ground라는 레이어에 닿았을때
         {
             isGround = true;
+            
         }
     }
 
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             isGround = false;
+            
         }
     }
 
@@ -54,7 +56,7 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        
+
     }
 
     private void Move()
@@ -77,21 +79,12 @@ public class Player : MonoBehaviour
     private void jump()//점프 함수 ontrigger로 isGround가 트루일때만 되게 생각해보기
     {
         //isGround = col.IsTouchingLayers(LayerMask.GetMask("Ground"));
-        if (isGround == true)
+
+        if (isGround == true && Input.GetKeyDown(KeyCode.LeftAlt))
         {
-            if (Input.GetKeyDown(KeyCode.LeftAlt))
-            {
-                rigid.velocity = Vector2.up * jumpForse;
-            }
+            rigid.velocity = Vector2.up * jumpForse;
         }
-        else
-        {
-            isGround = false;
-        }
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    rigid.velocity = Vector2.up * jumpForse;
-        //}
+        
     }
     private void Dash()//대쉬 알고리즘 수정해보기
     {
@@ -118,6 +111,6 @@ public class Player : MonoBehaviour
             dashTime -= Time.deltaTime;
             isDash = false;
         }
-        
+
     }
 }
