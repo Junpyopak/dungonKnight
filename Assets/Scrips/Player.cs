@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     [Header("플레이어 이동")]
     [SerializeField] float moveSpeed = 7f;
     [SerializeField] float jumpForse = 3f;
-    [SerializeField] bool isGround = false;
+    bool isGround = false;
     Vector2 movePos;
     Rigidbody2D rigid;
     Animator anim;
@@ -20,33 +20,26 @@ public class Player : MonoBehaviour
     bool isDash = false;
     [SerializeField] float dashSpeed = 12;
 
+    HitBox hitBox;
+
+
+
+
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
+        hitBox = GetComponentInChildren<HitBox>();
+        bool isGround = hitBox.checkGround();
+        //bool isGround2 = hitBox.IsGround;
+        //
     }
     void Start()
     {
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))//플레이어의 콜라이더가 ground라는 레이어에 닿았을때
-        {
-            isGround = true;
-            
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            isGround = false;
-            
-        }
-    }
 
     private void FixedUpdate()
     {
@@ -78,13 +71,15 @@ public class Player : MonoBehaviour
     }
     private void jump()//점프 함수 ontrigger로 isGround가 트루일때만 되게 생각해보기
     {
+
+
         //isGround = col.IsTouchingLayers(LayerMask.GetMask("Ground"));
 
-        if (isGround == true && Input.GetKeyDown(KeyCode.LeftAlt))
+        if (hitBox.checkGround() == true && Input.GetKeyDown(KeyCode.LeftAlt))
         {
             rigid.velocity = Vector2.up * jumpForse;
         }
-        
+
     }
     private void Dash()//대쉬 알고리즘 수정해보기
     {
