@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-        //RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.right, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));
+        //RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.right, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
         //if(ray)
         //{
         //    if (ray.transform.tag == Tags.Player.ToString())
@@ -56,10 +56,11 @@ public class Enemy : MonoBehaviour
         //    }
         //}
         //
-        if (Vector3.Distance(transform.position, trsPlayer.position) < 30)//distance함수,a와b의 거리를 계산해주는 함수를 이용해 적의 플레이어 확인하는것 생각해보기.
-        {
-            rigid.velocity = new Vector2(-1, 0) * speed;
-        }
+        //if (Vector3.Distance(transform.position, trsPlayer.position) < 30)//distance함수,a와b의 거리를 계산해주는 함수를 이용해 적의 플레이어 확인하는것 생각해보기.
+        //{
+        //    rigid.velocity = new Vector2(-1, 0) * speed;
+        //}
+        rigid.velocity = new Vector2(-1, 0) * speed;
     }
 
 }
