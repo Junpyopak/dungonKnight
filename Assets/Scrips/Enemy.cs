@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 1f;
     Rigidbody2D rigid;
     BoxCollider2D col;
-    [SerializeField] float rayDistance = 1f;
+    [SerializeField,Range(5f,10f)] float rayDistance = 10f;
     [SerializeField] Color rayColor;
     [SerializeField] bool showRay = false;
 
@@ -33,26 +33,37 @@ public class Enemy : MonoBehaviour
             return _value.ToString();
         }
     }
-
+    private void OnDrawGizmos()
+    {
+        if (showRay == true)
+        {
+            Gizmos.color = rayColor;
+            Gizmos.DrawLine(transform.position, transform.position - new Vector3(rayDistance, 0));
+        }
+    }
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
-        player = transform.Find("Player").GetComponent<Transform>();
+       // player = transform.Find("Player").GetComponent<Transform>();
     }
     private void FixedUpdate()
     {
-        Move();
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.forward, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
+        if (ray)
+        {
+            Debug.Log("닿았습니다.");
+        }
     }
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
     private void Move()
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        //float distance = Vector3.Distance(transform.position, player.position);
         //RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.right, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
         //if(ray)
         //{
@@ -67,16 +78,16 @@ public class Enemy : MonoBehaviour
         //    rigid.velocity = new Vector2(-1, 0) * speed;
         //}
         //rigid.velocity = new Vector2(-1, 0) * speed;
-        
+
         //if (distance <= range)
         //{
-        //    rigid.velocity = new Vector2(-1, 0) * speed;
+        rigid.velocity = new Vector2(-1, 0) * speed;
         //}
-        if (distance <= range)
-        {
-            transform.LookAt(player);
-            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        }
+        //if (distance <= range)
+        //{
+        //    transform.LookAt(player);
+        //    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        //}
 
     }
 
