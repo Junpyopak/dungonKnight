@@ -10,13 +10,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 1f;
     Rigidbody2D rigid;
     BoxCollider2D col;
-    [SerializeField,Range(5f,10f)] float rayDistance = 10f;
-    [SerializeField] Color rayColor;
-    [SerializeField] bool showRay = false;
+
 
     [Header("플레이어 발견 패턴")]
     [SerializeField, Range(5f, 25f)] float range = 10f;
     float distance = 0;
+    [SerializeField, Range(5f, 10f)] float rayDistance = 10f;
+    [SerializeField] Color rayColor;
+    [SerializeField] bool showRay = false;
+    [SerializeField] bool isPlayer = false;
 
     Transform player;
 
@@ -45,20 +47,17 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
-       // player = transform.Find("Player").GetComponent<Transform>();
+        // player = transform.Find("Player").GetComponent<Transform>();
     }
     private void FixedUpdate()
     {
-        RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.forward, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
-        if (ray)
-        {
-            Debug.Log("닿았습니다.");
-        }
+
     }
     // Update is called once per frame
     void Update()
     {
-       
+        checkPlayer();
+        //Move();
     }
 
     private void Move()
@@ -81,14 +80,28 @@ public class Enemy : MonoBehaviour
 
         //if (distance <= range)
         //{
-        rigid.velocity = new Vector2(-1, 0) * speed;
+        //rigid.velocity = new Vector2(-1, 0) * speed;
         //}
         //if (distance <= range)
         //{
         //    transform.LookAt(player);
         //    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         //}
+        //if(isPlayer == true) 
+        //{
+        //    rigid.velocity = new Vector2(-1, 0) * speed;
+        //}
 
+    }
+    private void checkPlayer()
+    {
+        RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.forward, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
+        if (ray)
+        {
+
+            Debug.Log("닿았습니다.");
+            isPlayer = true;
+        }
     }
 
 }
