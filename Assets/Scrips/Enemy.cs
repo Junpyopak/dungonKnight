@@ -14,7 +14,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] Color rayColor;
     [SerializeField] bool showRay = false;
 
-    Transform trsPlayer;
+    [Header("플레이어 발견 패턴")]
+    [SerializeField, Range(5f, 25f)] float range = 10f;
+    float distance = 0;
+
+    Transform player;
 
 
     // Start is called before the first frame update
@@ -34,7 +38,6 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
-        
     }
     private void FixedUpdate()
     {
@@ -43,10 +46,12 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void Move()
     {
+
         //RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.right, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
         //if(ray)
         //{
@@ -61,6 +66,17 @@ public class Enemy : MonoBehaviour
         //    rigid.velocity = new Vector2(-1, 0) * speed;
         //}
         rigid.velocity = new Vector2(-1, 0) * speed;
+        //float distance = Vector3.Distance(transform.position, player.position);
+        //if (distance <= range)
+        //{
+        //    rigid.velocity = new Vector2(-1, 0) * speed;
+        //}
+        //if (distance <= range)
+        //{
+        //    transform.LookAt(player);
+        //    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        //}
+
     }
 
 }
