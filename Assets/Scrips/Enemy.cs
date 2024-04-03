@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
+        player = transform.Find("Player").GetComponent<Transform>();
     }
     private void FixedUpdate()
     {
@@ -51,7 +52,7 @@ public class Enemy : MonoBehaviour
 
     private void Move()
     {
-
+        float distance = Vector3.Distance(transform.position, player.position);
         //RaycastHit2D ray = Physics2D.Raycast(transform.position, Vector3.right, rayDistance, LayerMask.GetMask(Tool.GetTag(Tags.Player)));///레이퀘스트를 쏴서 플레이어가 맞으면 이동
         //if(ray)
         //{
@@ -65,17 +66,17 @@ public class Enemy : MonoBehaviour
         //{
         //    rigid.velocity = new Vector2(-1, 0) * speed;
         //}
-        rigid.velocity = new Vector2(-1, 0) * speed;
-        //float distance = Vector3.Distance(transform.position, player.position);
+        //rigid.velocity = new Vector2(-1, 0) * speed;
+        
         //if (distance <= range)
         //{
         //    rigid.velocity = new Vector2(-1, 0) * speed;
         //}
-        //if (distance <= range)
-        //{
-        //    transform.LookAt(player);
-        //    transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        //}
+        if (distance <= range)
+        {
+            transform.LookAt(player);
+            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+        }
 
     }
 

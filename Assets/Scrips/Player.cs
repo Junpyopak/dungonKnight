@@ -108,4 +108,8 @@ public class Player : MonoBehaviour
         }
 
     }
+    //public float checkPosition()
+    //{
+    //    return transform.position.x;
+    //}
 }
