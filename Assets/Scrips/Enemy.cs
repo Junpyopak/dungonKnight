@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     [SerializeField, Range(5f, 10f)] float rayDistance = 10f;
     [SerializeField] Color rayColor;
     [SerializeField] bool showRay = false;
-    [SerializeField] bool isPlayer = false;
+    [SerializeField] public bool isPlayer = false;
     bool isflip=false;
 
     Transform player;
@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         // player = transform.Find("Player").GetComponent<Transform>();
+        
     }
     private void FixedUpdate()
     {
@@ -101,6 +102,7 @@ public class Enemy : MonoBehaviour
         if (ray)
         {
             isPlayer = true;
+            checkPlayerdis();
             //Debug.Log("닿았습니다.");
             if(isPlayer == true)//플레이어가 -1 방향의 레이퀘스트에 닿고,
             {
@@ -114,6 +116,7 @@ public class Enemy : MonoBehaviour
         else
         {
             isPlayer = false;
+            checkPlayerdis();
             rigid.velocity = new Vector2(0, 0);
         }
         Vector3 raydistance2 = new Vector3(1, 0, 0);
@@ -121,6 +124,7 @@ public class Enemy : MonoBehaviour
         if(ray2)
         {
             isPlayer = true; 
+            checkPlayerdis();
             //Debug.Log("닿았습니다.");
             if (isPlayer == true)
             {
@@ -139,5 +143,10 @@ public class Enemy : MonoBehaviour
         Vector3 localScale = transform.localScale;
         localScale.x *= -1;
         transform.localScale = localScale;
+    }
+
+    public bool checkPlayerdis()
+    {
+        return isPlayer;
     }
 }

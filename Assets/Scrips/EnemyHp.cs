@@ -5,35 +5,31 @@ using UnityEngine.UI;
 
 public class EnemyHp : MonoBehaviour
 {
-    private Slider Hpbar;
-    [SerializeField] float maxHp = 7;
-    [SerializeField] float curHp = 3;
-    private Transform trsEnemy;
-
+    public GameObject Slime;
+    Enemy enemy;
     private void Awake()
     {
-        Hpbar = GetComponent<Slider>();
+
     }
     void Start()
     {
-        trsEnemy = transform.Find("Slime").GetComponent<Transform>();
+        enemy = Slime.GetComponent<Enemy>();//슬라임 안에 있는 enemy 스크립트 가져옴.
     }
-    private void ChPostion()//슬라임의 위치에 따라 체력바의 위치 같이 이동
-    {
-        Vector3 movePos = trsEnemy.position;//슬라임의 위치
-        movePos.y -= 0.7f;
-        transform.position = movePos;
-    }
+
 
     private void CheckHp()//현재 체력 얼마인지 나타냄.
     {
-        if (Hpbar != null)
-            Hpbar.value = curHp / maxHp;
+
     }
     // Update is called once per frame
     void Update()
     {
-        ChPostion();
-        CheckHp();
+        transform.position = Camera.main.WorldToScreenPoint(Slime.transform.position+Vector3.down);//슬라임의 위치에 따라 hp 바 이미지 ui가 같이 이동
+        checkPlayer();
+    }
+
+    private void checkPlayer()
+    {
+         gameObject.SetActive(enemy.checkPlayerdis());
     }
 }

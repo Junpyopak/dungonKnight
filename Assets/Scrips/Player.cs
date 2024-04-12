@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rigid;
     Animator anim;
     Collider2D col;
+    bool maxJump = false;
 
     [Header("플레이어 대쉬"), SerializeField]
     float dashTime = 0.5f;
@@ -32,6 +33,7 @@ public class Player : MonoBehaviour
         col = GetComponent<Collider2D>();
         hitBox = GetComponentInChildren<HitBox>();
         bool isGround = hitBox.checkGround();
+        bool maxJump = hitBox.maxJumpCheck();
         //bool isGround2 = hitBox.IsGround;
         //
     }
@@ -112,4 +114,11 @@ public class Player : MonoBehaviour
     //{
     //    return transform.position.x;
     //}
+    private void MaxJump()
+    {
+        if (hitBox.maxJumpCheck() == true && Input.GetKeyDown(KeyCode.LeftAlt))
+        {
+            rigid.velocity = Vector2.up * 10;
+        }
+    }
 }

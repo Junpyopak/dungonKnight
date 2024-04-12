@@ -7,6 +7,7 @@ public class HitBox : MonoBehaviour
 {
     [SerializeField]
     bool isGround = false;
+   [SerializeField] bool maxJump = false;
     /// <summary>
     /// 다른 스크립트의 매개변수값을 전달할때
     /// </summary>
@@ -33,6 +34,10 @@ public class HitBox : MonoBehaviour
         {
             isGround = true;
         }
+        if(collision.gameObject.layer == LayerMask.NameToLayer("jumpBoard"))
+        {
+            maxJump = true;
+        }
     }    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
@@ -40,9 +45,18 @@ public class HitBox : MonoBehaviour
             isGround = false;
 
         }
+        if (collision.gameObject.layer == LayerMask.NameToLayer("jumpBoard"))
+        {
+            maxJump = false;
+        }
     }
     public bool checkGround()
     {
         return isGround;
+    }
+
+    public bool maxJumpCheck()
+    {
+        return maxJump;
     }
 }
