@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         checkPlayer();
-        checkPlayerdis();
+        //checkPlayerdis();
     }
 
     private void Move()
@@ -167,8 +167,8 @@ public class Enemy : MonoBehaviour
         transform.localScale = localScale;
     }
 
-    public bool checkPlayerdis()
-    {
-        return isPlayer;
-    }
+    //public bool checkPlayerdis()
+    //{
+    //    return isPlayer;
+    //}
 }
