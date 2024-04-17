@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [Header("플레이어 이동")]
     [SerializeField] float moveSpeed = 7f;
     [SerializeField] float jumpForse = 3f;
+    [SerializeField] float maxjumForse;
     bool isGround = false;
     Vector2 movePos;
     Rigidbody2D rigid;
@@ -82,6 +83,11 @@ public class Player : MonoBehaviour
             rigid.velocity = Vector2.up * jumpForse;
         }
 
+        if (hitBox.maxJumpCheck() == true)
+        {
+            rigid.velocity = Vector2.up * maxjumForse;
+        }
+
     }
     private void Dash()//대쉬 알고리즘 수정해보기
     {
@@ -114,11 +120,4 @@ public class Player : MonoBehaviour
     //{
     //    return transform.position.x;
     //}
-    private void MaxJump()
-    {
-        if (hitBox.maxJumpCheck() == true && Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            rigid.velocity = Vector2.up * 10;
-        }
-    }
 }

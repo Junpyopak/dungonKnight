@@ -5,31 +5,41 @@ using UnityEngine.UI;
 
 public class EnemyHp : MonoBehaviour
 {
-    public GameObject Slime;
     Enemy enemy;
     private void Awake()
     {
 
     }
-    void Start()
+    //void Start()
+    //{
+    //    enemy = Slime.GetComponent<Enemy>();//슬라임 안에 있는 enemy 스크립트 가져옴.
+    //}
+
+    public void SetEnemy(Enemy _enemy)
     {
-        enemy = Slime.GetComponent<Enemy>();//슬라임 안에 있는 enemy 스크립트 가져옴.
+        enemy = _enemy;
     }
 
+    //private void CheckHp()//현재 체력 얼마인지 나타냄.
+    //{
 
-    private void CheckHp()//현재 체력 얼마인지 나타냄.
-    {
-
-    }
+    //}
     // Update is called once per frame
     void Update()
     {
-        transform.position = Camera.main.WorldToScreenPoint(Slime.transform.position+Vector3.down);//슬라임의 위치에 따라 hp 바 이미지 ui가 같이 이동
-        checkPlayer();
+        //checkPlayer();
+        transform.position = Camera.main.WorldToScreenPoint(enemy.transform.position+Vector3.down);//슬라임의 위치에 따라 hp 바 이미지 ui가 같이 이동
     }
 
-    private void checkPlayer()
-    {
-         gameObject.SetActive(enemy.checkPlayerdis());
-    }
+    //private void checkPlayer()
+    //{
+    //    if(enemy.isPlayer==true)
+    //    {
+    //        gameObject.SetActive(true);
+    //    }
+    //    if(enemy.isPlayer== false)
+    //    {
+    //        gameObject.SetActive(false);
+    //    }
+    //}
 }

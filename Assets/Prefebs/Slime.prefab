@@ -173,6 +173,8 @@ MonoBehaviour:
   rayColor: {r: 1, g: 0, b: 0, a: 1}
   showRay: 1
   isPlayer: 0
+  objHpBar: {fileID: 7204868230074128363, guid: d9b2df472d53b1045af7fb86c377a140, type: 3}
+  trsHpCanvas: {fileID: 0}
 --- !u!50 &2867809203779536912
 Rigidbody2D:
   serializedVersion: 4
