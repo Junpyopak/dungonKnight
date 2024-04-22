@@ -120,4 +120,12 @@ public class Player : MonoBehaviour
     //{
     //    return transform.position.x;
     //}
+
+    private void Attack()//АјАн
+    {
+        if(Input.GetKeyDown(KeyCode.C)) 
+        {
+            //anim
+        }
+    }
 }

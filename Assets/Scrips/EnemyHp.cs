@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class EnemyHp : MonoBehaviour
 {
     Enemy enemy;
+    private Image hp;
+    [SerializeField] float curHp;
+    [SerializeField] float maxHp;
     private void Awake()
     {
-
     }
     //void Start()
     //{
@@ -31,15 +33,15 @@ public class EnemyHp : MonoBehaviour
         transform.position = Camera.main.WorldToScreenPoint(enemy.transform.position+Vector3.down);//슬라임의 위치에 따라 hp 바 이미지 ui가 같이 이동
     }
 
-    //private void checkPlayer()
-    //{
-    //    if(enemy.isPlayer==true)
-    //    {
-    //        gameObject.SetActive(true);
-    //    }
-    //    if(enemy.isPlayer== false)
-    //    {
-    //        gameObject.SetActive(false);
-    //    }
-    //}
-}
+    public void initHp()
+    {
+        hp = transform.Find("Image").GetComponent<Image>();
+    }
+
+    public void SetHp(float _curHp, float _maxHp)
+    {
+        curHp = _curHp;
+        maxHp = _maxHp;
+        hp.fillAmount = _curHp / _maxHp;
+    }
+ }

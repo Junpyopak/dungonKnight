@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("적 정보")]
+    [SerializeField] float maxhp = 5f;
     [SerializeField] float hp = 5f;
     [SerializeField] float speed = 1f;
     Rigidbody2D rigid;
@@ -25,7 +26,7 @@ public class Enemy : MonoBehaviour
     [Header("체력바")]
     [SerializeField] GameObject objHpBar;
     [SerializeField] Transform trsHpCanvas;
-    GameObject hpBar;
+    EnemyHp hpBar;
 
     // Start is called before the first frame update
     public enum Tags
@@ -50,6 +51,7 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
+        hp = maxhp;
         rigid = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         // player = transform.Find("Player").GetComponent<Transform>();
@@ -57,9 +59,9 @@ public class Enemy : MonoBehaviour
         //에너미 체력바 생성
         if (hpBar == null)//hp바가 없더라면
         {
-            hpBar = Instantiate(objHpBar, trsHpCanvas);// 체력바 생성
-            EnemyHp sc = hpBar.GetComponent<EnemyHp>();
-            sc.SetEnemy(this);
+            hpBar = Instantiate(objHpBar, trsHpCanvas).GetComponent<EnemyHp>();// 체력바 생성
+            hpBar.initHp();
+            hpBar.SetEnemy(this);
         }
         
     }
@@ -115,9 +117,9 @@ public class Enemy : MonoBehaviour
         {
             isPlayer = true;
 
-            if (hpBar.activeSelf == false)//적이 트루가 됐을때 체력바가 없다면 체력바 트루로해서 나타내기
+            if (hpBar.gameObject.activeSelf == false)//적이 트루가 됐을때 체력바가 없다면 체력바 트루로해서 나타내기
             {
-                hpBar.SetActive(true);
+                hpBar.gameObject.SetActive(true);
             }
 
             //Debug.Log("닿았습니다.");
@@ -134,9 +136,9 @@ public class Enemy : MonoBehaviour
         {
             isPlayer = false;
 
-            if (hpBar.activeSelf == true)//적이 폴스가 됐을때 체력바가 있다면 체력바 끄기
+            if (hpBar.gameObject.activeSelf == true)//적이 폴스가 됐을때 체력바가 있다면 체력바 끄기
             {
-                hpBar.SetActive(false);
+                hpBar.gameObject.SetActive(false);
             }
 
             rigid.velocity = new Vector2(0, 0);
@@ -171,4 +173,23 @@ public class Enemy : MonoBehaviour
     //{
     //    return isPlayer;
     //}
+    private void hit()
+    {
+        hp--;
+        hpBar.SetHp(hp, maxhp);
+        if (hp==0)
+        {
+            Destroy(hpBar.gameObject);
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == Tool.GetTag(Tags.Player))
+        {
+            hit();
+            Debug.Log("닿았습니다");
+        }
+    }
 }
