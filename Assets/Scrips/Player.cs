@@ -125,7 +125,7 @@ public class Player : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.C)) 
         {
-            //anim
+            //anim.SetTrigger(attack);
         }
     }
 }
