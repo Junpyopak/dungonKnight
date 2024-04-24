@@ -5,9 +5,17 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class HitBox : MonoBehaviour
 {
+    public enum eTypeHitbox
+    {
+        Attak,
+
+    }
+
     [SerializeField]
     bool isGround = false;
-   [SerializeField] bool maxJump = false;
+    [SerializeField] bool maxJump = false;
+
+
     /// <summary>
     /// 다른 스크립트의 매개변수값을 전달할때
     /// </summary>
@@ -17,13 +25,22 @@ public class HitBox : MonoBehaviour
     //}
 
     BoxCollider2D collision;
+
+    Player player;
+    [SerializeField] eTypeHitbox typeHitBox;
+
+    private void Awake()
+    {
+        player = transform.parent.GetComponent<Player>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    
+
     void Update()
     {
         collision = GetComponent<BoxCollider2D>();
@@ -34,11 +51,14 @@ public class HitBox : MonoBehaviour
         {
             isGround = true;
         }
-        if(collision.gameObject.layer == LayerMask.NameToLayer("jumpBoard"))
+        if (collision.gameObject.layer == LayerMask.NameToLayer("jumpBoard"))
         {
             maxJump = true;
         }
-    }    private void OnTriggerExit2D(Collider2D collision)
+
+        player.TriggerEnter2D(collision, typeHitBox);
+    }
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {

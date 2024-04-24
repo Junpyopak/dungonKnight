@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2867809203779536912}
   m_Layer: 0
   m_Name: Slime
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9142996823430694661
 SpriteRenderer:
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04578e81bc8e5094d9212d496785b7c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxhp: 5
   hp: 5
   speed: 1
   range: 10

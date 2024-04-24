@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ public class Enemy : MonoBehaviour
     public enum Tags
     {
         Player,
+        weapon,
+        enemy,
     }
     public static class Tool
     {
@@ -173,23 +176,23 @@ public class Enemy : MonoBehaviour
     //{
     //    return isPlayer;
     //}
-    private void hit()
+    public void hit(float _damage)
     {
-        hp--;
+        hp -= _damage;
         hpBar.SetHp(hp, maxhp);
-        if (hp==0)
+        if (hp<=0)
         {
             Destroy(hpBar.gameObject);
             Destroy(gameObject);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == Tool.GetTag(Tags.Player))
-        {
-            hit();
-            Debug.Log("´ê¾Ò½À´Ï´Ù");
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if(collision.tag == Tool.GetTag(Tags.weapon))
+    //    {
+    //        hit();
+    //        Debug.Log("´ê¾Ò½À´Ï´Ù");
+    //    }
+    //}
 }

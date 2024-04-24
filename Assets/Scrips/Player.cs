@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static Enemy;
 
 public class Player : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class Player : MonoBehaviour
     Vector2 movePos;
     Rigidbody2D rigid;
     Animator anim;
-    Collider2D col;
+    BoxCollider2D colbox;
     bool maxJump = false;
 
     [Header("플레이어 대쉬"), SerializeField]
@@ -24,6 +25,11 @@ public class Player : MonoBehaviour
 
     HitBox hitBox;
 
+    [Header("플레이어 공격")]
+    private float curTime;
+    [SerializeField] float damage = 3f;
+    [SerializeField] float coolTime = 0.5f;
+
 
 
 
@@ -31,7 +37,7 @@ public class Player : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        col = GetComponent<Collider2D>();
+        colbox = transform.Find("Attackbox").GetComponent<BoxCollider2D>();
         hitBox = GetComponentInChildren<HitBox>();
         bool isGround = hitBox.checkGround();
         bool maxJump = hitBox.maxJumpCheck();
@@ -46,9 +52,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //colbox.enabled = false;
         Move();
         jump();
         Dash();
+        Attack();
     }
     void Update()
     {
@@ -123,9 +131,48 @@ public class Player : MonoBehaviour
 
     private void Attack()//공격
     {
-        if(Input.GetKeyDown(KeyCode.C)) 
+        if (curTime <= 0)
         {
-            //anim.SetTrigger(attack);
+            if (Input.GetKey(KeyCode.C))//c키를 누르면 공격
+            {
+                anim.SetBool("attack", true);
+                curTime = coolTime;
+            }
+        }
+        else
+        {
+            anim.SetBool("attack", false);
+
+            curTime -= Time.deltaTime;
+        }
+
+    }
+
+    private void Colon()
+    {
+        colbox.enabled = true;//플레이어 자식중에 웨폰박스
+    }
+
+    private void endAttack()
+    {
+        colbox.enabled = false;
+    }
+
+    public void TriggerEnter2D(Collider2D other, HitBox.eTypeHitbox _type)
+    {
+        if (_type == HitBox.eTypeHitbox.Attak)
+        {
+            if (other.tag == Tool.GetTag(Tags.enemy))
+            {
+                Enemy enemy = other.GetComponent<Enemy>();
+                enemy.hit(damage);
+            }
         }
     }
+
+    public void TriggerExit2D(Collider2D collision, HitBox.eTypeHitbox _type)
+    {
+
+    }
+
 }
