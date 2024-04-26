@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float maxhp = 5f;
     [SerializeField] float hp = 5f;
     [SerializeField] float speed = 1f;
+    [SerializeField] float damage = 1f;
     Rigidbody2D rigid;
     BoxCollider2D col;
 
@@ -187,12 +188,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if(collision.tag == Tool.GetTag(Tags.weapon))
-    //    {
-    //        hit();
-    //        Debug.Log("´ê¾Ò½À´Ï´Ù");
-    //    }
-    //}
+    public void TriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == Tool.GetTag(Tags.Player))
+        {
+            Player player = GetComponent<Player>();
+            player.hit(damage);
+        }
+    }
 }

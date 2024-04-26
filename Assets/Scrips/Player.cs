@@ -6,7 +6,7 @@ using static Enemy;
 
 public class Player : MonoBehaviour
 {
-    private float PlayerHp = 50;
+    private float hp = 15;
     [Header("플레이어 이동")]
     [SerializeField] float moveSpeed = 7f;
     [SerializeField] float jumpForse = 3f;
@@ -30,8 +30,26 @@ public class Player : MonoBehaviour
     [SerializeField] float damage = 3f;
     [SerializeField] float coolTime = 0.5f;
 
+    [Header("체력바")]
+    [SerializeField] GameObject objHp;
+    [SerializeField] Transform trsHpCanvas;
+    [SerializeField] float curHp = 15;
+    [SerializeField] float maxHp = 30;
 
-
+    PlayerHp hpBar;
+    public enum Tags
+    {
+        Player,
+        weapon,
+        enemy,
+    }
+    public static class Tool
+    {
+        public static string GetTag(Tags _value)
+        {
+            return _value.ToString();
+        }
+    }
 
     private void Awake()
     {
@@ -46,7 +64,10 @@ public class Player : MonoBehaviour
     }
     void Start()
     {
-
+        hp = maxHp;
+        hpBar = GameObject.Find("PlayerHp").GetComponent<PlayerHp>();// 체력바 찾기
+        hpBar.initHp();
+        hpBar.SetPlayer(this);
     }
 
 
@@ -175,4 +196,14 @@ public class Player : MonoBehaviour
 
     }
 
+    public void hit(float _damage)
+    {
+        hp -= _damage;
+        hpBar.SetHp(hp, maxHp);
+        if (hp <= 0)
+        {
+            Destroy(hpBar.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }

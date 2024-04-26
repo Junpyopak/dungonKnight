@@ -8,6 +8,8 @@ public class HitBox : MonoBehaviour
     public enum eTypeHitbox
     {
         Attak,
+        Ground,
+        JumpBoard,
 
     }
 
