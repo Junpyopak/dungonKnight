@@ -192,7 +192,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.tag == Tool.GetTag(Tags.Player))
         {
-            Player player = GetComponent<Player>();
+            Player player = collision.GetComponent<Player>();
             player.hit(damage);
         }
     }
