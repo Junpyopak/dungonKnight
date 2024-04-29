@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static Enemy;
 
 public class Player : MonoBehaviour
@@ -189,12 +190,11 @@ public class Player : MonoBehaviour
                 enemy.hit(damage);
             }
         }
-        //if(_type == HitBox.eTypeHitbox.Hit)
+        //if (_type == HitBox.eTypeHitbox.Hit)
         //{
-        //    if(other.tag == Tool.GetTag(Tags.enemy))
+        //    if (other.tag == Tool.GetTag(Tags.enemy))
         //    {
-        //        Player player = other.GetComponent<Player>();
-        //        player.hit(damage);
+        //        Damage();
         //    }
         //}
     }
@@ -214,4 +214,15 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    //public void Damage()
+    //{
+    //    damage = 1;
+    //    hp -= damage;
+    //    hpBar.SetHp(hp, maxHp);
+    //    if(hp <= 0)
+    //    {
+    //        Destroy(hpBar.gameObject);
+    //        Destroy(gameObject);
+    //    }
+    //}
 }
