@@ -189,6 +189,14 @@ public class Player : MonoBehaviour
                 enemy.hit(damage);
             }
         }
+        //if(_type == HitBox.eTypeHitbox.Hit)
+        //{
+        //    if(other.tag == Tool.GetTag(Tags.enemy))
+        //    {
+        //        Player player = other.GetComponent<Player>();
+        //        player.hit(damage);
+        //    }
+        //}
     }
 
     public void TriggerExit2D(Collider2D collision, HitBox.eTypeHitbox _type)

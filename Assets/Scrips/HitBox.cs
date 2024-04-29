@@ -10,6 +10,7 @@ public class HitBox : MonoBehaviour
         Attak,
         Ground,
         JumpBoard,
+        Hit,
 
     }
 
