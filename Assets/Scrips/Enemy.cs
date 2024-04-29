@@ -188,7 +188,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TriggerEnter2D(Collider2D collision)
+    public void TriggerEnter2D(BoxCollider2D collision)
     {
         if (collision.tag == Tool.GetTag(Tags.Player))
         {

@@ -190,13 +190,13 @@ public class Player : MonoBehaviour
                 enemy.hit(damage);
             }
         }
-        //if (_type == HitBox.eTypeHitbox.Hit)
-        //{
-        //    if (other.tag == Tool.GetTag(Tags.enemy))
-        //    {
-        //        Damage();
-        //    }
-        //}
+        if (_type == HitBox.eTypeHitbox.Hit)
+        {
+            if (other.tag == Tool.GetTag(Tags.enemy))
+            {
+                Damage();
+            }
+        }
     }
 
     public void TriggerExit2D(Collider2D collision, HitBox.eTypeHitbox _type)
@@ -214,15 +214,15 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    //public void Damage()
-    //{
-    //    damage = 1;
-    //    hp -= damage;
-    //    hpBar.SetHp(hp, maxHp);
-    //    if(hp <= 0)
-    //    {
-    //        Destroy(hpBar.gameObject);
-    //        Destroy(gameObject);
-    //    }
-    //}
+    public void Damage()
+    {
+        damage = 1;
+        hp -= damage;
+        hpBar.SetHp(hp, maxHp);
+        if (hp <= 0)
+        {
+            Destroy(hpBar.gameObject);
+            Destroy(gameObject);
+        }
+    }
 }
